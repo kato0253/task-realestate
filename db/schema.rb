@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_19_054527) do
+ActiveRecord::Schema.define(version: 2020_06_20_055550) do
 
   create_table "properties", force: :cascade do |t|
     t.integer "price"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 2020_06_19_054527) do
     t.integer "distance"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "property_id"
   end
 
 end

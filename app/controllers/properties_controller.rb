@@ -15,6 +15,7 @@ class PropertiesController < ApplicationController
   # GET /properties/new
   def new
     @property = Property.new
+    2.times{ @property.stations.build }
   end
 
   # GET /properties/1/edit
@@ -25,17 +26,13 @@ class PropertiesController < ApplicationController
   # POST /properties.json
   def create
     @property = Property.new(property_params)
-
-    respond_to do |format|
-      if @property.save
-        format.html { redirect_to @property, notice: 'Property was successfully created.' }
-        format.json { render :show, status: :created, location: @property }
-      else
-        format.html { render :new }
-        format.json { render json: @property.errors, status: :unprocessable_entity }
-      end
+    if @property.save
+      redirect_to properties_path, notice: "物件を登録しました！"
+    else
+    render :new
     end
   end
+
 
   # PATCH/PUT /properties/1
   # PATCH/PUT /properties/1.json
@@ -67,8 +64,21 @@ class PropertiesController < ApplicationController
       @property = Property.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def property_params
-      params.require(:property).permit(:Property_Name, :price, :address, :age, :remark)
+        params.require(:property).permit(
+          :property_name,
+          :price,
+          :address,
+          :age,
+          :remark,
+          stations_attributes: [
+            :route_name,
+            :station_name,
+            :distance,
+            :property_id,
+            :id,
+            :_destroy,
+          ],
+        )
     end
 end
