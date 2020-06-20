@@ -20,6 +20,7 @@ class PropertiesController < ApplicationController
 
   # GET /properties/1/edit
   def edit
+    @property.stations.build
   end
 
   # POST /properties
@@ -72,12 +73,12 @@ class PropertiesController < ApplicationController
           :age,
           :remark,
           stations_attributes: [
-            :route_name,
-            :station_name,
-            :distance,
-            :property_id,
-            :id,
-            :_destroy,
+          :route_name,
+          :station_name,
+          :distance,
+          :property_id,
+          :id,
+          :_destroy,
           ],
         )
     end
